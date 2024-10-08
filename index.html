@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration</title>
+</head>
+<body>
+    <h2>Register New User</h2>
+    <form action="" id = "register-form">
+        <label for="name">Name:</label>
+        <input type="text" name='name' id='name' required>
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required>
+        <button type ="submit">Register</button>
+    </form>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async function(event){
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // send the data to server
+            const response = await fetch('/auth/register', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type' : 'application/json'
+                        },
+                        body: JSON.stringify({ name, email, password})
+                    })
+
+                    const data = await response.json();
+                    
+                    alert('New user created!')
+                })
+    </script>
+</body>
+</html>
